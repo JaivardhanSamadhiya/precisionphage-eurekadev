@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "title": "Source attribution and retained notices",
+  "scope": "Applies to reused research artifacts and compact data. Source authors do not endorse the website or candidate planner. Data terms are distinct from article publication terms.",
+  "researchCredit": {
+    "title": "PrecisionPhage: leakage-controlled phage-host interaction prediction",
+    "author": "Jaivardhan Samadhiya",
+    "version": "2.0.0",
+    "repository": "https://github.com/JaivardhanSamadhiya/precisionphage",
+    "role": "Pre-existing research software, saved prediction scores, and evaluation artifacts; no models were trained for this website.",
+    "citationSource": "D:/full_pipeline/CITATION.cff"
+  },
+  "mitNotices": [
+    {
+      "id": "precisionphage-research",
+      "title": "PrecisionPhage research source license",
+      "source": "D:/full_pipeline/LICENSE",
+      "url": "https://github.com/JaivardhanSamadhiya/precisionphage",
+      "license": "MIT",
+      "text": "MIT License\n\nCopyright (c) 2026 Jaivardhan Samadhiya\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    {
+      "id": "genophi-pinned",
+      "title": "GenoPHI retained source notice",
+      "url": "https://github.com/Noonanav/GenoPHI/blob/f7e30abc1b0bbba1ae76b8f58a3363bbbc5cd54f/LICENSE",
+      "commit": "f7e30abc1b0bbba1ae76b8f58a3363bbbc5cd54f",
+      "license": "MIT",
+      "text": "MIT License\n\nCopyright (c) 2024-2025 The Regents of the University of California,\nthrough Lawrence Berkeley National Laboratory (subject to receipt of\nany required approvals from the U.S. Dept. of Energy). All rights reserved.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    }
+  ],
+  "dataAttribution": [
+    {
+      "id": "genophi-processed",
+      "creators": "Avery James Cameron Noonan, Lucas Morinière, Edwin Omar Rivera-Lopez, Krish Patel, Melina Pena, Madeline Svab, Alexey Kazakov, Adam Deutschbauer, Edward Dudley, Vivek Mutalik, Adam Arkin",
+      "title": "Data for: Phylogeny-agnostic strain-level prediction of phage–host interactions from genomes using machine learning",
+      "url": "https://doi.org/10.5281/zenodo.21696332",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "verifiedMetadataUrl": "https://zenodo.org/api/records/21696332",
+      "adaptation": "Pseudomonas subset selected from the processed interaction matrix; exact host/phage identifiers joined to pre-existing PrecisionPhage predictions. No observed assay labels changed."
+    },
+    {
+      "id": "basel-metadata",
+      "creators": "Dorentina Humolli, Damien Piel, Enea Maffei, Yannik Heyer, Elia Agustoni, Aisylu Shaidullina, Luc Willi, Patrick Imwinkelried, Fabienne Estermann, Aline Cuénod, Dominik P. Buser, Carola Alampi, Mohamed Chami, Adrian Egli, Sebastian Hiller, Matthew Dunne, Alexander Harms",
+      "title": "Completing the BASEL phage collection to unlock hidden diversity for systematic exploration of phage–host interactions",
+      "citation": "PLOS Biology 23(4): e3003063 (2025)",
+      "url": "https://doi.org/10.1371/journal.pbio.3003063",
+      "dataUrl": "https://doi.org/10.1371/journal.pbio.3003063.s002",
+      "license": "Creative Commons Attribution",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "adaptation": "Phage names, genera and accessions from S2 Table retained for the 52 evaluated BASEL phages; the compact website presents a subset rather than the full BASEL collection."
+    },
+    {
+      "id": "ecor-genomes",
+      "creators": "Isha R. Patel, Jayanthi Gangiredla, Mark K. Mammel, Keith A. Lampel, Christopher A. Elkins, David W. Lacher",
+      "title": "Draft Genome Sequences of the Escherichia coli Reference (ECOR) Collection",
+      "citation": "Microbiology Resource Announcements 7(14): e01133-18 (2018)",
+      "url": "https://doi.org/10.1128/MRA.01133-18",
+      "role": "Primary accession mapping source for the pre-existing research evaluation; no genome sequences copied into this website."
+    }
+  ],
+  "publicationAttribution": [
+    {
+      "creators": "Avery J. C. Noonan, Lucas Moriniere, Edwin O. Rivera-López, Krish Patel, Melina Pena, et al.",
+      "title": "Phylogeny-agnostic strain-level prediction of phage–host interactions from genomes using machine learning",
+      "journal": "Nature Microbiology",
+      "year": 2026,
+      "url": "https://doi.org/10.1038/s41564-026-02482-5",
+      "role": "Publication explaining source experimental banks; no article text or figures copied and no GenoPHI predictor run for this website."
+    }
+  ],
+  "transformations": "The demo selects two evaluated banks, preserves raw saved score values and binary observed labels, joins exact identifiers to compact metadata, and omits 60 unscored/unobserved BASEL cells without treating them as negatives. Complete consumed-source paths and SHA-256 hashes are in provenance.json."
+}
+
