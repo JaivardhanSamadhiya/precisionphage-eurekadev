@@ -19,7 +19,7 @@ for (const bank of dataset.banks) {
 }
 const snapshot = provenance.generatedFiles.find((file) => file.path === 'public/data/bank.json');
 assert.equal(createHash('sha256').update(bytes).digest('hex'), snapshot.sha256, 'Compact data integrity mismatch');
-for (const file of ['public/app.js', 'public/planner.js', 'scripts/serve.mjs', 'scripts/build.mjs']) {
+for (const file of ['public/app.js', 'public/planner.js', 'public/export.js', 'scripts/serve.mjs', 'scripts/build.mjs']) {
   const result = spawnSync(process.execPath, ['--check', file], { cwd: root, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
 }

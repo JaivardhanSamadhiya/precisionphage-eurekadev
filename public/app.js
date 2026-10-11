@@ -1,4 +1,5 @@
-import { validateBank, planScreen, createExport } from './planner.js';
+import { validateBank, planScreen } from './planner.js';
+import { createSnapshotExport } from './export.js';
 
 const $ = (id) => document.getElementById(id);
 const escape = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
@@ -117,18 +118,7 @@ $('budget').addEventListener('input', update);
 $('cocktail-size').addEventListener('change', update);
 $('show-all').addEventListener('click', () => { showAll = !showAll; renderTable(); });
 $('download').addEventListener('click', () => {
-  const exported = {
-    ...createExport(bank, hostId, plan),
-    datasetVersion: dataset.datasetVersion,
-    scoreMeaning: bank.scoreMeaning,
-    observationMeaning: bank.observationMeaning,
-    model: bank.model,
-    evaluationMode: bank.evaluationMode,
-    limitations: bank.limitations,
-    sourceIds: bank.sourceIds,
-    sources: provenance.sources.filter((source) => bank.sourceIds.includes(source.id)),
-    provenance: { ...provenance, sourceManifest: './data/provenance.json' },
-  };
+  const exported = createSnapshotExport(dataset, provenance, bank.id, hostId, plan);
   const url = URL.createObjectURL(new Blob([JSON.stringify(exported, null, 2)], { type: 'application/json' }));
   const link = document.createElement('a');
   link.href = url;
