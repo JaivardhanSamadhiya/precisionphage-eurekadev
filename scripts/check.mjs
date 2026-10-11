@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { validateBank } from '../public/planner.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -19,8 +20,18 @@ for (const bank of dataset.banks) {
 }
 const snapshot = provenance.generatedFiles.find((file) => file.path === 'public/data/bank.json');
 assert.equal(createHash('sha256').update(bytes).digest('hex'), snapshot.sha256, 'Compact data integrity mismatch');
-for (const file of ['public/app.js', 'public/planner.js', 'public/export.js', 'scripts/serve.mjs', 'scripts/build.mjs']) {
+async function codeFiles(directory) {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...await codeFiles(path));
+    else if (/\.m?js$/.test(entry.name)) files.push(path);
+  }
+  return files;
+}
+const files = [...await codeFiles(join(root, 'public')), ...await codeFiles(join(root, 'scripts'))];
+for (const file of files) {
   const result = spawnSync(process.execPath, ['--check', file], { cwd: root, encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr);
 }
-console.log(`Checked ${dataset.banks.length} banks, compact data integrity, and JavaScript syntax.`);
+console.log(`Checked ${dataset.banks.length} banks, compact data integrity, and ${files.length} JavaScript modules.`);

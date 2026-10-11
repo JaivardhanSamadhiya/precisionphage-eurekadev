@@ -14,8 +14,7 @@ The source research checkout is read-only. Extraction refuses output inside it.
 This demo uses saved predictions. Candidate mixtures require further testing.
 Original source citations, hashes, and license notices: public/data/
 
-Local-only submission writing and setup documentation: README.md, docs/,
-hackathon-submission/. These are intentionally excluded from GitHub commits.
-After creating an empty GitHub repository, add its actual origin URL and run
-git push -u origin main. No remote or deployment is created by these scripts.
+Project instructions: README.md and docs/. Submission writing: hackathon-submission/.
+Public repository: https://github.com/JaivardhanSamadhiya/precisionphage-eurekadev
+The Pages workflow tests and builds main before deploying its static output.
 `);
