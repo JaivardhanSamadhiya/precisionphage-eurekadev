@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "datasetVersion": "saved-research-2026-10-06-demo-v1",
+  "sourceAccess": "Read-only local research snapshot. No research script was run, source modified, or model fitted.",
+  "exportMethod": "Scores joined by exact host/phage identifiers to independent raw observations; audited against saved evaluated labels. Rankings never use labels.",
+  "predictionSubset": {
+    "basel-ecor": "All 1,240 saved evaluated predictions",
+    "pseudomonas": "All 437 saved rows with bank=Pseudomonas and grouping=identity"
+  },
+  "selectionScope": "UI selects candidates from stored raw scores; no retraining, calibrated probability, mixture prediction, or clinical validation.",
+  "missingness": "Unscored/unobserved BASEL cells are omitted, never imputed as negative. Pseudomonas has no missing cells.",
+  "files": [
+    {
+      "path": "data/external_validation/basel_ecor_2026/SEALED_BASEL_ECOR_interaction_matrix.csv",
+      "sha256": "bc0426a80b392281815ab24066e97cdc445399a62d67bb4f8e56511088947ba5",
+      "bytes": 18625,
+      "purpose": "Independent original binary assay observations"
+    },
+    {
+      "path": "data/external_validation/genophi_2026/processed_data.zip",
+      "sha256": "1d98c77fc4068315246a4eb56aa185fc769c06bf70fd20e5090856b25f94a00d",
+      "bytes": 656165,
+      "purpose": "Published processed interaction matrix archive; original assay observations",
+      "consumedMember": {
+        "path": "GenoPHI_processed_data/interaction_matrices_all_datasets.csv",
+        "sha256": "46dd1e17670034aa46fa3e6f83ca1ad84fbe27f44fd193217c913439fac15c00",
+        "bytes": 5124776
+      }
+    },
+    {
+      "path": "data/results_v2/additional_banks/pair_predictions.csv",
+      "sha256": "2dc3c6f9c3ca1a6620c3d9bdb69603bc6c71270f056c3855b113da50343ca2db",
+      "bytes": 2349509,
+      "purpose": "Saved additional-bank predictions; fixed Pseudomonas identity-fold subset"
+    },
+    {
+      "path": "data/results_v2/additional_banks/summary.json",
+      "sha256": "4123b55e04a366a1001c7f05ad8d0aa275d5cb5563febf04321106c86d445a19",
+      "bytes": 45251,
+      "purpose": "Saved bank-specific evaluation and source provenance"
+    },
+    {
+      "path": "data/results_v2/basel_ecor_validation/evaluated_predictions.csv",
+      "sha256": "17e5ab717db7365bc2b7d8c797448772e5c2a153f5394c9b7e5643f6097e6cde",
+      "bytes": 85606,
+      "purpose": "Verify independent score/observation join and phage clusters"
+    },
+    {
+      "path": "data/results_v2/basel_ecor_validation/evaluation.json",
+      "sha256": "acdf464c8b7d088bf8a5c0494f08f627f885a356ce5d3301e03f59ebde922193",
+      "bytes": 2877,
+      "purpose": "Saved evaluation metrics and limitations"
+    },
+    {
+      "path": "data/results_v2/basel_ecor_validation/frozen_predictions.csv",
+      "sha256": "00419d9dac76d4013ea203fd30880395445641baea20e2ecfccb984d700e4901",
+      "bytes": 30220,
+      "purpose": "Frozen saved ranking scores; no refitting"
+    },
+    {
+      "path": "data/results_v2/basel_ecor_validation/genome_accession_mapping.json",
+      "sha256": "6d3709606b685f0100de0a81088ebfbfcc22d1edf8daf5fe865b17ec3ff7cb6e",
+      "bytes": 23387,
+      "purpose": "Published phage genus/name/accession and host accession mapping"
+    },
+    {
+      "path": "data/results_v2/basel_ecor_validation/identifier_manifest.json",
+      "sha256": "abd0d2b5508eaeb8f6616afaaacb59f0f30217736e54aea614ef795d486d1596",
+      "bytes": 1908,
+      "purpose": "Pinned original matrix URL, commit and digest"
+    },
+    {
+      "path": "data/results_v2/basel_ecor_validation/prediction_lock.json",
+      "sha256": "753aa44cd5b38f478f98d2caea03aec03c99f8d94dba984d4e674cd8036bd430",
+      "bytes": 3494,
+      "purpose": "Recorded prediction freeze and original source hashes"
+    }
+  ],
+  "generatedFiles": [
+    {
+      "path": "public/data/bank.json",
+      "sha256": "5464517ffdc06a3ae7e4bba3bf4c4fcd6ebc2c2e7feb62927611b75948585afb",
+      "bytes": 103477
+    }
+  ],
+  "extractor": {
+    "path": "scripts/extract-data.py",
+    "sha256": "18235adb5afeba8ecbc535c65cbb44fbbcc40230d1ad102abe114ed4353eb2ac"
+  },
+  "sources": [
+    {
+      "id": "genophi-pinned",
+      "title": "GenoPHI BASEL–ECOR assay matrix at pinned commit f7e30abc1b0bbba1ae76b8f58a3363bbbc5cd54f",
+      "url": "https://github.com/Noonanav/GenoPHI/blob/f7e30abc1b0bbba1ae76b8f58a3363bbbc5cd54f/data/experimental_validation/BASEL_ECOR_interaction_matrix.csv",
+      "terms": "GenoPHI repository MIT license; retain original notices and publication attribution.",
+      "licenseUrl": "https://github.com/Noonanav/GenoPHI/blob/f7e30abc1b0bbba1ae76b8f58a3363bbbc5cd54f/LICENSE"
+    },
+    {
+      "id": "genophi-zenodo",
+      "title": "GenoPHI processed data (Noonan et al.)",
+      "url": "https://doi.org/10.5281/zenodo.21696332",
+      "terms": "CC BY 4.0 for the processed dataset; attribute Noonan et al. and original experiments.",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "id": "noonan-2026",
+      "title": "Noonan et al. (2026), Phylogeny-agnostic strain-level prediction of phage–host interactions from genomes using machine learning",
+      "url": "https://doi.org/10.1038/s41564-026-02482-5",
+      "role": "Publication explaining GenoPHI bank provenance; article terms are separate from dataset terms."
+    },
+    {
+      "id": "basel-2025",
+      "title": "Humolli et al. (2025), PLOS Biology 23(4): e3003063; BASEL supplementary phage table S2",
+      "url": "https://doi.org/10.1371/journal.pbio.3003063",
+      "dataUrl": "https://doi.org/10.1371/journal.pbio.3003063.s002",
+      "terms": "CC BY; preserve original author attribution."
+    },
+    {
+      "id": "ecor-2018",
+      "title": "Patel et al. (2018), Microbiology Resource Announcements 7(14): e01133-18; ECOR genome provenance",
+      "url": "https://doi.org/10.1128/MRA.01133-18",
+      "role": "Published ECOR genome accession provenance; no genome sequences copied into this website."
+    }
+  ],
+  "attribution": "PrecisionPhage website export adapted existing saved research artifacts. Original datasets, experiments, genomes, and models predate the website build.",
+  "licenseSeparation": "Website code licensing does not replace original source-data licenses or publication terms."
+}
