@@ -120,12 +120,18 @@
         </p>
       </div>
 
-      <section id="workbench" class="section-heading" aria-labelledby="workbench-heading">
+      <section
+        id="workbench"
+        class="section-heading"
+        aria-labelledby="workbench-heading"
+      >
         <div>
           <p class="eyebrow">01 / SCREENING WORKBENCH</p>
           <h2 id="workbench-heading">A focused plan, within your budget.</h2>
         </div>
-        <span class="snapshot-badge">Saved prediction snapshot</span>
+        <span id="snapshot-status" class="snapshot-badge"
+          >Saved prediction snapshot</span
+        >
       </section>
       <div id="loading" class="loading" role="status">
         Loading the evaluated phage bank…
@@ -141,7 +147,10 @@
           <select id="bank-select" aria-describedby="bank-description"></select>
           <p id="bank-description" class="field-hint"></p>
           <label for="host-select">Bacterial host</label>
-          <select id="host-select" aria-describedby="species-label pair-count"></select>
+          <select
+            id="host-select"
+            aria-describedby="species-label pair-count"
+          ></select>
           <div class="host-summary">
             <span id="species-label"></span>
             <span id="pair-count"></span>
@@ -167,7 +176,10 @@
             estimate or mixture-assay budget is implied.
           </p>
           <label for="cocktail-size">Candidate mixture size</label>
-          <select id="cocktail-size" aria-describedby="cocktail-size-hint"></select>
+          <select
+            id="cocktail-size"
+            aria-describedby="cocktail-size-hint"
+          ></select>
           <p id="cocktail-size-hint" class="field-hint">
             Selected from your shortlist, favoring distinct recorded sequence
             clusters when available.
@@ -328,13 +340,173 @@
       </section>
 
       <section
+        id="budget-lab"
+        class="insights-section"
+        aria-labelledby="budget-heading"
+        hidden
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 / COMPARE THE EXPERIMENT</p>
+            <h2 id="budget-heading">
+              Is this ranking worth your testing budget?
+            </h2>
+          </div>
+          <span class="outline-badge">Recorded assays, every budget</span>
+        </div>
+        <div class="panel frontier-panel">
+          <div class="frontier-intro">
+            <div>
+              <h3 id="frontier-title">Saved ranks versus random screening</h3>
+              <p>
+                Compare recorded positives found by score order with the
+                expectation from random selection. The outcome oracle shows a
+                hindsight limit, using labels a planner could not know in
+                advance.
+              </p>
+            </div>
+            <button id="download-audit" class="button" type="button">
+              Export budget audit ↓
+            </button>
+          </div>
+          <div id="frontier-chart" class="frontier-chart"></div>
+          <div class="frontier-legend">
+            <span><i class="curve-key saved"></i> Saved rank order</span>
+            <span><i class="curve-key random"></i> Random expectation</span>
+            <span
+              ><i class="curve-key oracle"></i> Outcome oracle · hindsight
+              only</span
+            >
+          </div>
+          <div id="frontier-summary" class="frontier-summary"></div>
+          <p id="bank-audit-summary" class="bank-audit-summary"></p>
+          <p id="frontier-cohort" class="field-hint"></p>
+          <details class="audit-table">
+            <summary>Inspect the numbers at every budget</summary>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Budget audit table"
+            >
+              <table>
+                <caption class="sr-only">
+                  Retrospective positives found at each assay budget
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Budget</th>
+                    <th>Saved ranks</th>
+                    <th>Random expected</th>
+                    <th>Hindsight limit</th>
+                    <th>Recall</th>
+                  </tr>
+                </thead>
+                <tbody id="frontier-table"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section
+        id="portfolio-lab"
+        class="insights-section"
+        aria-labelledby="portfolio-heading"
+        hidden
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">04 / PLAN ACROSS HOSTS</p>
+            <h2 id="portfolio-heading">
+              One screening panel. Several host priorities.
+            </h2>
+          </div>
+          <div class="portfolio-actions">
+            <button id="load-panel-example" class="button" type="button">
+              Load example panel ↗</button
+            ><span class="outline-badge">Saved rank objective</span>
+          </div>
+        </div>
+        <div class="portfolio-layout">
+          <div class="panel portfolio-controls">
+            <h3>Choose a host panel</h3>
+            <p class="field-hint">
+              Select up to six hosts from the current bank. A shared panel can
+              balance their different saved rankings.
+            </p>
+            <div
+              id="portfolio-hosts"
+              class="host-checkboxes"
+              role="group"
+              aria-label="Hosts in shared screening panel"
+            ></div>
+            <label for="portfolio-size">Number of phages in the panel</label>
+            <select id="portfolio-size">
+              <option value="1">1 phage</option>
+              <option value="2" selected>2 phages</option>
+              <option value="3">3 phages</option>
+              <option value="4">4 phages</option>
+              <option value="5">5 phages</option>
+              <option value="6">6 phages</option>
+            </select>
+            <p class="field-hint">
+              The objective averages the best reciprocal saved rank on each
+              host. Small panels use exact search; larger searches use
+              deterministic greedy selection. Experimental outcomes never enter
+              the objective.
+            </p>
+            <p
+              id="portfolio-error"
+              class="inline-error"
+              role="alert"
+              hidden
+            ></p>
+          </div>
+          <div class="panel portfolio-results">
+            <div class="portfolio-result-heading">
+              <h3>Shared panel for further testing</h3>
+              <button id="download-panel" class="button" type="button">
+                Export panel ↓
+              </button>
+            </div>
+            <div id="portfolio-metrics" class="portfolio-metrics"></div>
+            <div id="portfolio-members" class="portfolio-members"></div>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Shared panel ranks and recorded assays by host"
+            >
+              <table>
+                <caption class="sr-only">
+                  Saved ranks and separately recorded assays for the selected
+                  host panel
+                </caption>
+                <thead id="portfolio-matrix-head"></thead>
+                <tbody id="portfolio-matrix"></tbody>
+              </table>
+            </div>
+            <p id="portfolio-method" class="field-hint"></p>
+            <p class="portfolio-caveat">
+              A high reciprocal rank only represents the saved model’s
+              preferences. This panel is a proposal for individual screening; it
+              is not a validated broad-spectrum cocktail. Adding members after
+              the rank objective saturates may offer no additional benefit under
+              this objective.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
         id="method"
         class="method-section"
         aria-labelledby="method-heading"
       >
         <div class="section-heading">
           <div>
-            <p class="eyebrow">03 / REPRODUCIBLE BY DESIGN</p>
+            <p class="eyebrow">05 / REPRODUCIBLE BY DESIGN</p>
             <h2 id="method-heading">
               Follow every decision back to its source.
             </h2>
@@ -420,7 +592,9 @@
       ></p>
     </main>
     <footer>
-      <a class="brand" href="./">Precision<span class="brand-light">Phage</span></a>
+      <a class="brand" href="./"
+        >Precision<span class="brand-light">Phage</span></a
+      >
       <p>A hackathon research interface. Built to make evidence inspectable.</p>
       <span>Plan experiments. Validate in the lab.</span>
     </footer>
