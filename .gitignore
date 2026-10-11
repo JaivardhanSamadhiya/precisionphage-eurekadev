@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.cache/
+coverage/
+test-results/
+playwright-report/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+# Requested GitHub scope: code, compact data, tests, and runtime configuration.
+# Writing and hackathon submission artifacts remain available locally.
+README.md
+docs/
+hackathon-submission/
+artifacts/
+.openai/
