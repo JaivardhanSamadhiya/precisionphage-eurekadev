@@ -3,6 +3,7 @@ import { validateBank, planScreen, createExport } from './planner.js';
 const $ = (id) => document.getElementById(id);
 const escape = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const fixed = (value) => Number.isFinite(value) ? value.toFixed(3) : 'Unavailable';
+const scoreText = (value) => value.toFixed(6);
 const assay = (value) => value === 1 ? ['positive', 'Positive'] : value === 0 ? ['negative', 'Negative'] : ['unknown', 'Unavailable'];
 let dataset, provenance, bank, hostId, plan;
 let showAll = false;
@@ -61,8 +62,11 @@ function renderPlan() {
   $('stat-positive').textContent = `${comparison.shortlisted.positive} / ${comparison.shortlisted.assayed}`;
   $('stat-observations').textContent = 'among recorded individual assays';
   $('ranking-host').textContent = `for ${hostId}`;
+  $('ranking-caveat').textContent = bank.id === 'basel-ecor'
+    ? 'Model failure case: bank AUROC 0.470 with severe overprediction. High saved scores did not reliably predict recorded activity.'
+    : 'Bank-specific saved host-identity evaluation. Scores are uncalibrated and performance depends on how related hosts are grouped.';
   renderTable();
-  $('cocktail-members').innerHTML = plan.cocktail.map((row) => `<div class="member"><strong>${escape(row.phageId)}</strong><span>Saved score ${fixed(row.score)}</span><span>${row.clusterKnown ? `Sequence cluster ${escape(row.cluster)}` : 'Sequence cluster unavailable'}</span></div>`).join('');
+  $('cocktail-members').innerHTML = plan.cocktail.map((row) => `<div class="member"><strong>${escape(row.phageId)}</strong><span title="${escape(row.score)}">Saved score ${scoreText(row.score)}</span><span>${row.clusterKnown ? `Sequence cluster ${escape(row.cluster)}` : 'Sequence cluster unavailable'}</span><span>Recorded assay: ${assay(row.observed)[1].toLowerCase()}</span></div>`).join('');
   const count = plan.diversity.knownClusterCount;
   $('cocktail-rationale').textContent = `Selected ${plan.cocktail.length} phages from the top ${plan.budget} saved ranks. ${count ? `${count} distinct recorded sequence cluster${count === 1 ? '' : 's'} represented.` : 'No phage sequence cluster metadata is available; selection follows score order.'} This heuristic does not estimate combined efficacy.`;
 }
@@ -74,7 +78,7 @@ function renderTable() {
     const [status, label] = assay(row.observed);
     const inBudget = row.rank <= plan.budget;
     const inCocktail = members.has(row.phageId);
-    return `<tr class="${inBudget ? 'shortlisted' : ''}"><td class="rank-number">${String(row.rank).padStart(2, '0')}</td><td><span class="phage-name">${escape(row.phageId)}</span><span class="phage-subtitle">${row.clusterKnown ? `Cluster ${escape(row.cluster)}` : 'Cluster unavailable'}</span></td><td class="score-cell"><span class="score-numeric">${fixed(row.score)}</span><span class="score-track" aria-hidden="true"><i style="width:${Math.max(0, Math.min(1, row.score)) * 100}%"></i></span></td><td><span class="assay-badge ${status}">${label}</span></td><td>${inCocktail ? '<span class="plan-chip mixture">Mixture candidate</span>' : inBudget ? '<span class="plan-chip">To screen</span>' : '<span class="rank-number">—</span>'}</td></tr>`;
+    return `<tr class="${inBudget ? 'shortlisted' : ''}"><td class="rank-number">${String(row.rank).padStart(2, '0')}</td><td><span class="phage-name" title="${escape(row.name)}">${escape(row.phageId)}</span><span class="phage-subtitle">${row.clusterKnown ? `Cluster ${escape(row.cluster)}` : 'Cluster unavailable'}</span></td><td class="score-cell"><span class="score-numeric" title="Full saved score: ${escape(row.score)}">${scoreText(row.score)}</span><span class="score-track" aria-hidden="true"><i style="width:${Math.max(0, Math.min(1, row.score)) * 100}%"></i></span></td><td><span class="assay-badge ${status}">${label}</span></td><td>${inCocktail ? '<span class="plan-chip mixture">Mixture candidate</span>' : inBudget ? '<span class="plan-chip">To screen</span>' : '<span class="rank-number">—</span>'}</td></tr>`;
   }).join('');
   $('table-count').textContent = `${visible.length} of ${plan.ranked.length} scored phage–host pairs`;
   $('show-all').hidden = plan.ranked.length <= 10;
