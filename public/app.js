@@ -94,17 +94,17 @@ function renderEvidence() {
   $('model-heading').textContent = bank.name;
   const metrics = bank.metrics || {};
   $('model-metrics').innerHTML = `<div><strong>${fixed(metrics.auroc)}</strong><span>Bank AUROC</span></div>${Number.isFinite(metrics.ece) ? `<div><strong>${fixed(metrics.ece)}</strong><span>Calibration error (ECE)</span></div>` : '<div><strong>Uncalibrated</strong><span>Use scores for ranking only</span></div>'}`;
-  $('performance-summary').textContent = bank.id === 'basel-ecor' ? 'This frozen transfer evaluation failed to discriminate activity (AUROC 0.470) and severely overpredicted it. High scores do not imply reliable activity.' : 'This bank-specific retrospective evaluation depends on grouping assumptions. It does not establish performance on new hosts or clinical efficacy.';
+  $('performance-summary').textContent = bank.id === 'basel-ecor' ? 'This frozen transfer evaluation failed to discriminate activity (AUROC 0.470) and severely overpredicted it. High scores do not imply reliable activity.' : 'This bank-specific retrospective evaluation holds out host identities and depends on grouping assumptions. It does not establish performance on prospectively collected or independently sourced hosts, or clinical efficacy.';
   $('limitations').innerHTML = bank.limitations.map((item) => `<li>${escape(item)}</li>`).join('');
 }
 
 function renderSources() {
-  const citations = provenance.citations || [];
+  const citations = provenance.sources || [];
   $('sources-content').innerHTML = `<p>Research artifacts predate this website. Source snapshots were read from a separate research project and extracted into compact data. Predictions and observations are joined by exact host–phage identifiers; missing scores are not invented.</p><ul>${citations.map((citation) => {
     const title = citation.title || citation.label || citation.name || citation.id;
     const url = citation.url || (citation.doi ? `https://doi.org/${citation.doi}` : '');
-    return `<li>${/^https:\/\//.test(url) ? `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(title)}</a>` : escape(title)}${citation.authors ? ` — ${escape(citation.authors)}` : ''}</li>`;
-  }).join('')}</ul><p>All sources, upstream attribution, extraction checks, and source hashes are preserved in the manifest below. A source hash records the snapshot consumed; it does not independently certify historical blinding.</p>`;
+    return `<li>${/^https:\/\//.test(url) ? `<a href="${escape(url)}" target="_blank" rel="noopener">${escape(title)}</a>` : escape(title)}${citation.authors ? ` — ${escape(citation.authors)}` : ''}${citation.terms ? `<br>${escape(citation.terms)}` : ''}</li>`;
+  }).join('')}</ul><p>Saved scores and research models: <a href="https://github.com/JaivardhanSamadhiya/precisionphage" target="_blank" rel="noopener">PrecisionPhage research project, Jaivardhan Samadhiya</a>. The models, experiments, and saved results predate this website.</p><p>All sources, upstream attribution, extraction checks, and source hashes are preserved in the manifest below. A source hash records the snapshot consumed; it does not independently certify historical blinding. <a href="./data/notices.json" target="_blank" rel="noopener">Read original attribution and license notices</a>.</p>`;
 }
 
 $('bank-select').addEventListener('change', (event) => chooseBank(event.target.value));
@@ -113,7 +113,18 @@ $('budget').addEventListener('input', update);
 $('cocktail-size').addEventListener('change', update);
 $('show-all').addEventListener('click', () => { showAll = !showAll; renderTable(); });
 $('download').addEventListener('click', () => {
-  const exported = { ...createExport(bank, hostId, plan), sourceManifest: './data/provenance.json', citations: provenance.citations || [] };
+  const exported = {
+    ...createExport(bank, hostId, plan),
+    datasetVersion: dataset.datasetVersion,
+    scoreMeaning: bank.scoreMeaning,
+    observationMeaning: bank.observationMeaning,
+    model: bank.model,
+    evaluationMode: bank.evaluationMode,
+    limitations: bank.limitations,
+    sourceIds: bank.sourceIds,
+    sources: provenance.sources.filter((source) => bank.sourceIds.includes(source.id)),
+    provenance: { ...provenance, sourceManifest: './data/provenance.json' },
+  };
   const url = URL.createObjectURL(new Blob([JSON.stringify(exported, null, 2)], { type: 'application/json' }));
   const link = document.createElement('a');
   link.href = url;

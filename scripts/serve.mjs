@@ -21,5 +21,5 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(error.code === 'ENOENT' || error.code === 'EISDIR' ? 404 : 400).end('File unavailable');
   }
 });
-server.listen(port, '127.0.0.1', () => console.log(`PrecisionPhage: http://127.0.0.1:${port}`));
+server.listen(port, '127.0.0.1', () => console.log(`PrecisionPhage: http://127.0.0.1:${server.address().port}`));
 for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close());
