@@ -8,7 +8,7 @@ Built for [EurekaDEV 2026](https://eurekadev.devpost.com/), Coding Track / Biolo
 
 ## Try it
 
-[Public repository](https://github.com/JaivardhanSamadhiya/precisionphage-eurekadev). Expected Pages address: [live workbench](https://jaivardhansamadhiya.github.io/precisionphage-eurekadev/). Deployment verification will be recorded when complete.
+[Open the live workbench](https://jaivardhansamadhiya.github.io/precisionphage-eurekadev/) or [browse the public repository](https://github.com/JaivardhanSamadhiya/precisionphage-eurekadev). The HTTPS demo and its exports were checked after deployment; [verification notes](docs/VERIFICATION.md) record the checks.
 
 Install Node.js 22 or later, then run:
 

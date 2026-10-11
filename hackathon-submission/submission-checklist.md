@@ -19,11 +19,11 @@
 
 ## Final checks
 
-- [ ] Run `npm test`, `npm run check`, and `npm run build` on the final commit.
-- [ ] Test the deployed banks, host switching, budget extremes, unavailable cells, baselines, shared panels, and exports.
-- [ ] Check mobile and keyboard use, saved-prediction labels, score interpretation, and candidate-only wording.
-- [ ] Confirm citations and notices are shipped; secrets, research checkout, genomes, weights, caches, and generated artifacts are excluded.
-- [ ] Verify deployed version against the submitted commit and update `docs/VERIFICATION.md`.
-- [ ] Retain existing-research and Codex disclosure; explain individual assays versus mixture validation.
+- [x] Run `npm test`, `npm run check`, and `npm run build` for the release; CI repeats them on each push.
+- [x] Test deployed bank switching, budget extremes, unavailable-cell disclosure, baselines, shared panels, and exports.
+- [x] Check mobile and keyboard budget controls, saved-prediction labels, score interpretation, and candidate-only wording.
+- [x] Ship citations and notices; exclude secrets, research checkout, genomes, weights, caches, and generated artifacts.
+- [x] Compare published assets with the repository and record deployment in `docs/VERIFICATION.md`. Recheck after any later edits.
+- [x] Retain existing-research and Codex disclosure; explain individual assays versus mixture validation.
 - [ ] Add team/video information and verify all links.
 - [ ] Rehearse with [judging-rubric.md](judging-rubric.md).

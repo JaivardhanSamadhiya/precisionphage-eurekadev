@@ -4,6 +4,8 @@
 
 Suggested track: Coding. Suggested category: Biology/Medical and Environmental Science.
 
+[Live demo](https://jaivardhansamadhiya.github.io/precisionphage-eurekadev/) · [Public source and setup](https://github.com/JaivardhanSamadhiya/precisionphage-eurekadev)
+
 ## Why this project
 
 Antimicrobial resistance makes some infections harder to treat and creates a need for further research. [WHO describes it as a major global health threat](https://www.who.int/news-room/fact-sheets/detail/antimicrobial-resistance). Phages offer an interesting research direction, but a prediction table alone does not tell a researcher what to test with a limited screening budget or how much trust to place in the ranking.
@@ -34,7 +36,7 @@ The second bank uses a separate retrospective evaluation. Its identity-grouped A
 
 JavaScript ES modules, HTML, CSS, compact JSON, and Node's built-in APIs power the app. Pure functions handle planning and retrospective analysis; browser modules render decisions. A Python standard-library extractor reads original research files without executing them, joins scores and observations by exact identifiers, and records SHA-256 hashes.
 
-Tests check budgets, missingness, stable ties, independence from historical labels, analytic baselines, exact-search behavior, source consistency, exports, and serving. The static build is prepared for GitHub Pages, with public setup and methodology documentation.
+Sixty tests check budgets, missingness, stable ties, independence from historical labels, analytic baselines, exact-search behavior, source consistency, exports, and serving. GitHub Actions checks and builds the public GitHub Pages deployment. The browser also verifies the raw snapshot bytes against the committed manifest before displaying evidence.
 
 ## Scope and next steps
 
@@ -51,4 +53,4 @@ Potential impact is clearer experimental prioritization and review. A next study
 
 [Sources](../docs/SOURCES.md) and the downloadable manifest give exact source versions, terms, and transformations.
 
-Before copying into Devpost, add actual team names, verified repository/live demo links, and a recorded video link. Do not describe existing research or assays as new website work.
+Before copying into Devpost, add actual team names and a recorded video link. Do not describe existing research or assays as new website work.
