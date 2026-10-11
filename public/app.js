@@ -89,7 +89,7 @@ function renderTable() {
 
 function renderEvidence() {
   const { full, shortlisted, positiveRecall } = plan.comparison;
-  const recall = positiveRecall == null ? 'No recorded positives are available for a recall comparison.' : `The shortlist captures ${(positiveRecall * 100).toFixed(0)}% of ${full.positive} recorded positives among scored pairs.`;
+  const recall = positiveRecall == null ? 'No recorded positives are available for a recall comparison.' : `The shortlist captures ${(positiveRecall * 100).toFixed(0)}% of ${full.positive} recorded positives among recorded pairs.`;
   $('comparison-text').textContent = `For ${hostId}, ${shortlisted.positive} of ${shortlisted.assayed} recorded assays in the top ${plan.budget} ranks were positive; ${shortlisted.negative} were negative${shortlisted.unknown ? ` and ${shortlisted.unknown} were unavailable` : ''}. ${recall} This is a retrospective comparison using existing data.`;
   $('observation-chart').innerHTML = plan.ranked.map((row) => {
     const [status, label] = assay(row.observed);
