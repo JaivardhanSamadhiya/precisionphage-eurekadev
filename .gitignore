@@ -9,10 +9,6 @@ __pycache__/
 .env
 .env.*
 !.env.example
-# Requested GitHub scope: code, compact data, tests, and runtime configuration.
-# Writing and hackathon submission artifacts remain available locally.
-README.md
-docs/
-hackathon-submission/
+# Generated previews and local verification checkouts stay out of the release.
 artifacts/
 .openai/
